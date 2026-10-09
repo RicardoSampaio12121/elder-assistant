@@ -1,4 +1,5 @@
 using CareApp.Application.Auth;
+using CareApp.Application.Auth.Contracts;
 
 namespace CareApp.Tests.Unit.Application.Auth;
 

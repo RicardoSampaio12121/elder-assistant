@@ -1,3 +1,5 @@
+using CareApp.Application.Auth.Contracts;
+
 namespace CareApp.Application.Auth;
 
 /// <summary>

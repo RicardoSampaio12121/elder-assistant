@@ -1,4 +1,5 @@
 using CareApp.Application.Auth;
+using CareApp.Application.Auth.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;

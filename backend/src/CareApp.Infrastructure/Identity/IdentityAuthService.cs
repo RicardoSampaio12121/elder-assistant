@@ -1,4 +1,5 @@
 using CareApp.Application.Auth;
+using CareApp.Application.Auth.Contracts;
 using CareApp.Application.Common.Exceptions;
 using CareApp.Infrastructure.Persistence;
 using FluentValidation;

@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using CareApp.Application.Auth;
+using CareApp.Application.Auth.Contracts;
 using CareApp.Infrastructure.Persistence;
 using CareApp.Tests.Integration.Infrastructure;
 using Microsoft.AspNetCore.Mvc;

@@ -1,3 +1,4 @@
+using CareApp.Application.Auth.Contracts;
 using FluentValidation;
 
 namespace CareApp.Application.Auth;
