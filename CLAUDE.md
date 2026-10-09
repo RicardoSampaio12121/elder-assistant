@@ -16,3 +16,6 @@ Initialise entities and value objects through constructors, not object initialis
 
 ### Never use DbContext directly in services
 Services must not depend on `DbContext`. Wrap all database operations in a manager class (e.g. `RefreshTokenManager`) and inject that instead.
+
+### Try to use managers related to their services
+If, for example, on User service and need the Car manager, call Car service instead.
