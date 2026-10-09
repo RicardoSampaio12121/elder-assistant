@@ -1,16 +1,34 @@
 import 'package:careapp/app.dart';
 import 'package:careapp/core/network/api_client.dart';
+import 'package:careapp/features/auth/data/secure_token_storage.dart';
+import 'package:careapp/features/auth/presentation/auth_notifier.dart';
+import 'package:careapp/features/auth/presentation/auth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'helpers/fake_secure_token_storage.dart';
+
+class _UnauthenticatedNotifier extends AuthNotifier {
+  @override
+  AuthState build() => const AuthState(status: AuthStatus.unauthenticated);
+}
+
 void main() {
-  testWidgets('starts on the placeholder home screen in PT-PT', (tester) async {
-    await tester.pumpWidget(const ProviderScope(child: CareApp()));
+  testWidgets('unauthenticated user lands on the login screen', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          secureTokenStorageProvider
+              .overrideWithValue(FakeSecureTokenStorage()),
+          authNotifierProvider
+              .overrideWith(_UnauthenticatedNotifier.new),
+        ],
+        child: const CareApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
-    expect(find.text('CareApp'), findsOneWidget);
-    expect(find.text('Bem-vindo ao CareApp'), findsOneWidget);
-    expect(find.text('Em breve, mais funcionalidades.'), findsOneWidget);
+    expect(find.text('Entrar'), findsWidgets);
   });
 
   test('dio is configured with the API base URL', () {

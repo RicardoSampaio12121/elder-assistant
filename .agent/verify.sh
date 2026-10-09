@@ -23,6 +23,10 @@ for dir in . */; do
   if [ -f "$dir/pyproject.toml" ] || [ -f "$dir/requirements.txt" ]; then
     echo "== Python: $dir"; (cd "$dir" && python -m pytest); ran=1
   fi
+
+  if [ -f "$dir/pubspec.yaml" ]; then
+    echo "== Flutter: $dir"; (cd "$dir" && flutter pub get && flutter test); ran=1
+  fi
 done
 
 [ "$ran" = 1 ] || { echo "No project detected. Edit .agent/verify.sh."; exit 1; }
