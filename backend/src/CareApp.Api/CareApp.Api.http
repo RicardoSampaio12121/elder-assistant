@@ -1,0 +1,5 @@
+@CareApp.Api_HostAddress = http://localhost:5293
+
+GET {{CareApp.Api_HostAddress}}/health
+
+###
