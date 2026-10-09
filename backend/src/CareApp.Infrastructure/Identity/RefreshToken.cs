@@ -5,6 +5,17 @@ namespace CareApp.Infrastructure.Identity;
 /// </summary>
 public class RefreshToken
 {
+    protected RefreshToken() { }
+
+    public RefreshToken(Guid id, Guid userId, string tokenHash, DateTimeOffset createdAt, DateTimeOffset expiresAt)
+    {
+        Id = id;
+        UserId = userId;
+        TokenHash = tokenHash;
+        CreatedAt = createdAt;
+        ExpiresAt = expiresAt;
+    }
+
     public Guid Id { get; set; }
 
     public Guid UserId { get; set; }

@@ -10,3 +10,9 @@ All code must be in English: variable names, method names, comments, exception m
 
 ### Folder organisation
 Group related files into subfolders when a concept has multiple files. For example, request/response contracts live in a `Contracts/` subfolder alongside the service interface and validators that use them.
+
+### Use constructors, not object initialisers
+Initialise entities and value objects through constructors, not object initialisers. Add a `protected` parameterless constructor alongside the public one to keep EF Core happy.
+
+### Never use DbContext directly in services
+Services must not depend on `DbContext`. Wrap all database operations in a manager class (e.g. `RefreshTokenManager`) and inject that instead.

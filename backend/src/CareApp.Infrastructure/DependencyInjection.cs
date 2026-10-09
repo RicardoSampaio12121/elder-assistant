@@ -64,6 +64,7 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<CareAppDbContext>();
 
         services.AddScoped<TokenService>();
+        services.AddScoped<RefreshTokenManager>();
         services.AddScoped<IAuthService, IdentityAuthService>();
     }
 

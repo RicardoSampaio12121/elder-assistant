@@ -1,7 +1,6 @@
 using CareApp.Application.Auth;
 using CareApp.Application.Auth.Contracts;
 using CareApp.Application.Common.Exceptions;
-using CareApp.Infrastructure.Persistence;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
@@ -13,14 +12,13 @@ namespace CareApp.Infrastructure.Identity;
 
 internal sealed class IdentityAuthService(
     UserManager<User> userManager,
-    CareAppDbContext dbContext,
+    RefreshTokenManager refreshTokenManager,
     TokenService tokenService,
     IOptions<JwtOptions> jwtOptions,
     TimeProvider timeProvider) : IAuthService
 {
     private const string DuplicateEmailMessage = "An account with this email already exists.";
     private const string InvalidCredentialsMessage = "Invalid email or password.";
-    private const string InvalidRefreshTokenMessage = "The session is invalid or has expired. Please sign in again.";
 
     public async Task<UserResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken = default)
     {
@@ -29,13 +27,10 @@ internal sealed class IdentityAuthService(
             throw new ConflictException(DuplicateEmailMessage);
         }
 
-        var user = new User
-        {
-            UserName = request.Email,
-            Email = request.Email,
-            Name = request.Name.Trim(),
-            PhoneNumber = string.IsNullOrWhiteSpace(request.PhoneNumber) ? null : request.PhoneNumber.Trim(),
-        };
+        var user = new User(
+            request.Email,
+            request.Name.Trim(),
+            string.IsNullOrWhiteSpace(request.PhoneNumber) ? null : request.PhoneNumber.Trim());
 
         IdentityResult result;
         try
@@ -73,7 +68,7 @@ internal sealed class IdentityAuthService(
         if (user is null)
         {
             // Hash anyway so that response times do not reveal whether the email is registered.
-            userManager.PasswordHasher.HashPassword(new User(), request.Password);
+            userManager.PasswordHasher.HashPassword(new User(request.Email, string.Empty), request.Password);
             throw new AuthenticationFailedException(InvalidCredentialsMessage);
         }
 
@@ -87,63 +82,30 @@ internal sealed class IdentityAuthService(
 
     public async Task<AuthTokensResponse> RefreshAsync(RefreshTokenRequest request, CancellationToken cancellationToken = default)
     {
-        var tokenHash = TokenService.HashRefreshToken(request.RefreshToken);
+        var oldTokenHash = TokenService.HashRefreshToken(request.RefreshToken);
         var now = timeProvider.GetUtcNow();
+        var expiresAt = now.Add(jwtOptions.Value.RefreshTokenLifetime);
 
-        await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+        var (user, newRawRefreshToken) = await refreshTokenManager.RotateAsync(oldTokenHash, now, expiresAt, cancellationToken);
+        var (accessToken, accessTokenExpiresAt) = tokenService.CreateAccessToken(user);
 
-        var refreshToken = await dbContext.RefreshTokens
-            .AsNoTracking()
-            .Include(token => token.User)
-            .SingleOrDefaultAsync(token => token.TokenHash == tokenHash, cancellationToken);
-
-        if (refreshToken is null || refreshToken.RevokedAt is not null || refreshToken.ExpiresAt <= now)
-        {
-            throw new AuthenticationFailedException(InvalidRefreshTokenMessage);
-        }
-
-        // Revoke with a conditional update so that concurrent requests with the same token issue at most one new pair.
-        var revoked = await dbContext.RefreshTokens
-            .Where(token => token.Id == refreshToken.Id && token.RevokedAt == null)
-            .ExecuteUpdateAsync(setters => setters.SetProperty(token => token.RevokedAt, now), cancellationToken);
-
-        if (revoked == 0)
-        {
-            throw new AuthenticationFailedException(InvalidRefreshTokenMessage);
-        }
-
-        var tokens = await IssueTokensAsync(refreshToken.User, cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
-
-        return tokens;
+        return new AuthTokensResponse(accessToken, accessTokenExpiresAt, newRawRefreshToken, expiresAt);
     }
 
     public async Task<UserResponse?> GetUserAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         var user = await userManager.FindByIdAsync(userId.ToString());
-
         return user is null ? null : ToResponse(user);
     }
 
     private async Task<AuthTokensResponse> IssueTokensAsync(User user, CancellationToken cancellationToken)
     {
         var (accessToken, accessTokenExpiresAt) = tokenService.CreateAccessToken(user);
-
-        var refreshToken = TokenService.GenerateRefreshToken();
         var now = timeProvider.GetUtcNow();
-        var refreshTokenExpiresAt = now.Add(jwtOptions.Value.RefreshTokenLifetime);
+        var expiresAt = now.Add(jwtOptions.Value.RefreshTokenLifetime);
+        var rawRefreshToken = await refreshTokenManager.IssueAsync(user.Id, now, expiresAt, cancellationToken);
 
-        dbContext.RefreshTokens.Add(new RefreshToken
-        {
-            Id = Guid.CreateVersion7(),
-            UserId = user.Id,
-            TokenHash = TokenService.HashRefreshToken(refreshToken),
-            CreatedAt = now,
-            ExpiresAt = refreshTokenExpiresAt,
-        });
-        await dbContext.SaveChangesAsync(cancellationToken);
-
-        return new AuthTokensResponse(accessToken, accessTokenExpiresAt, refreshToken, refreshTokenExpiresAt);
+        return new AuthTokensResponse(accessToken, accessTokenExpiresAt, rawRefreshToken, expiresAt);
     }
 
     private static UserResponse ToResponse(User user) => new(user.Id, user.Name, user.Email!, user.PhoneNumber);

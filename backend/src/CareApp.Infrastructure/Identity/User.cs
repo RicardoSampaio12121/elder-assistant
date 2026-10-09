@@ -7,5 +7,15 @@ namespace CareApp.Infrastructure.Identity;
 /// </summary>
 public class User : IdentityUser<Guid>
 {
+    protected User() { }
+
+    public User(string email, string name, string? phoneNumber = null)
+    {
+        UserName = email;
+        Email = email;
+        Name = name;
+        PhoneNumber = phoneNumber;
+    }
+
     public string Name { get; set; } = string.Empty;
 }
