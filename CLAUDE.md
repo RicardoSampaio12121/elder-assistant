@@ -32,12 +32,14 @@ Calm, warm, trustworthy. Closer to a good health/banking app than a startup dash
 Reassuring, never alarming. No playful gimmicks, no stock-illustration cheeriness.
 
 ## Visual language
-- Palette: warm off-white background, one deep primary (muted teal or blue-green),
-  one soft accent. Semantic colors only for status: green = done, amber = due soon,
+- Palette: primary deep indigo (`#4338CA`), surface warm-indigo white (`#F8F7FF`),
+  cards on pure white. Semantic colors only for status: green = done, amber = due soon,
   red = overdue/urgent. Never rely on color alone (add icon + label).
-- Type: one humanist sans (e.g. Inter/Source Sans) with a clear scale
-  (12/14/16/20/28). Body min 16px. Strong weight contrast for hierarchy.
-- Spacing: 8px grid. Generous padding. Cards with 12–16px radius, soft shadow.
+  See DESIGN.md for the full token list.
+- Type: Inter (via google_fonts). Scale: 11/12/14/16/20/22/24/28/32. Body min 16px.
+  Strong weight contrast for hierarchy (w400 body, w600–w700 headings).
+- Spacing: 8px grid. Generous padding. Cards 16px radius. Hero sections use 28px
+  top radius for the neutral content card. Soft border (`outlineVariant`) replaces shadow on cards.
 - Touch targets ≥ 48px. Contrast WCAG AA minimum.
 
 ## UX principles

@@ -21,5 +21,13 @@
   "fieldRequired": "Campo obrigatório.",
   "fieldInvalidEmail": "Introduza um e-mail válido.",
   "fieldPasswordTooShort": "A palavra-passe deve ter pelo menos 8 caracteres.",
-  "errorGeneric": "Ocorreu um erro. Tente novamente."
+  "errorGeneric": "Ocorreu um erro. Tente novamente.",
+  "authTagline": "Cuidar em conjunto.",
+  "homeSubtitle": "O seu painel de cuidado diário.",
+  "homeSectionMedication": "Medicação",
+  "homeSectionAppointments": "Consultas",
+  "homeSectionFamily": "Família",
+  "homeEmptyMedication": "Sem medicação registada para hoje",
+  "homeEmptyAppointments": "Sem consultas marcadas",
+  "homeEmptyFamily": "Sem atualizações recentes"
 }

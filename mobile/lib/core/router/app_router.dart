@@ -44,7 +44,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
 class _RouterChangeNotifier extends ChangeNotifier {
   _RouterChangeNotifier(this._ref) {
-    _ref.listen(authNotifierProvider, (_, __) => notifyListeners());
+    _ref.listen(authNotifierProvider, (_, _) => notifyListeners());
   }
 
   final Ref _ref;

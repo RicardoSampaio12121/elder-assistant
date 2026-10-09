@@ -87,5 +87,37 @@
   "errorGeneric": "Ocorreu um erro. Tente novamente.",
   "@errorGeneric": {
     "description": "Mensagem de erro genérico."
+  },
+  "authTagline": "Cuidar em conjunto.",
+  "@authTagline": {
+    "description": "Tagline nos ecrãs de autenticação."
+  },
+  "homeSubtitle": "O seu painel de cuidado diário.",
+  "@homeSubtitle": {
+    "description": "Subtítulo do ecrã inicial."
+  },
+  "homeSectionMedication": "Medicação",
+  "@homeSectionMedication": {
+    "description": "Título da secção de medicação."
+  },
+  "homeSectionAppointments": "Consultas",
+  "@homeSectionAppointments": {
+    "description": "Título da secção de consultas."
+  },
+  "homeSectionFamily": "Família",
+  "@homeSectionFamily": {
+    "description": "Título da secção de família."
+  },
+  "homeEmptyMedication": "Sem medicação registada para hoje",
+  "@homeEmptyMedication": {
+    "description": "Estado vazio da secção de medicação."
+  },
+  "homeEmptyAppointments": "Sem consultas marcadas",
+  "@homeEmptyAppointments": {
+    "description": "Estado vazio da secção de consultas."
+  },
+  "homeEmptyFamily": "Sem atualizações recentes",
+  "@homeEmptyFamily": {
+    "description": "Estado vazio da secção de família."
   }
 }
