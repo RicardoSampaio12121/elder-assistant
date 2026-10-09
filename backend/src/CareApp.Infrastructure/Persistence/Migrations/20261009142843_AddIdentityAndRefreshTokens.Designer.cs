@@ -3,6 +3,7 @@ using System;
 using CareApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CareApp.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CareAppDbContext))]
-    partial class CareAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261009142843_AddIdentityAndRefreshTokens")]
+    partial class AddIdentityAndRefreshTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

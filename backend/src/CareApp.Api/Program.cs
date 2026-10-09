@@ -1,3 +1,5 @@
+using CareApp.Api.Authentication;
+using CareApp.Api.ErrorHandling;
 using CareApp.Application;
 using CareApp.Infrastructure;
 
@@ -5,9 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+builder.Services.AddJwtAuthentication();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
 builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ApplicationExceptionHandler>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -28,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

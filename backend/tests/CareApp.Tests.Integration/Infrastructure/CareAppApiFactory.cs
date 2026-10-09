@@ -11,6 +11,8 @@ namespace CareApp.Tests.Integration.Infrastructure;
 /// </summary>
 public class CareAppApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
+    public const string JwtSigningKey = "integration-tests-signing-key-0123456789abcdef";
+
     private readonly PostgreSqlContainer _postgres = new PostgreSqlBuilder("postgres:17-alpine").Build();
 
     public async ValueTask InitializeAsync()
@@ -23,6 +25,7 @@ public class CareAppApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
         builder.UseEnvironment("Testing");
         builder.UseSetting($"ConnectionStrings:{DependencyInjection.ConnectionStringName}", _postgres.GetConnectionString());
         builder.UseSetting("Database:MigrateOnStartup", "true");
+        builder.UseSetting("Jwt:SigningKey", JwtSigningKey);
 
         builder.ConfigureServices(services =>
             services.AddControllers().AddApplicationPart(typeof(CareAppApiFactory).Assembly));

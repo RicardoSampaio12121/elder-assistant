@@ -36,6 +36,14 @@ dotnet run --project src/CareApp.Api --launch-profile http
 - Health check: `GET http://localhost:5293/health`
 - Swagger UI (só em Development): `http://localhost:5293/swagger`
 
+### Autenticação
+
+ASP.NET Core Identity + JWT: `POST /auth/register`, `POST /auth/login`, `POST /auth/refresh` e `GET /auth/me` (protegido).
+O access token dura 15 minutos e o refresh token 30 dias; cada refresh token só pode ser usado uma vez.
+
+A chave de assinatura (`Jwt:SigningKey`, mínimo 32 caracteres) só está definida em `appsettings.Development.json`.
+Noutros ambientes é obrigatório defini-la (ex.: variável de ambiente `Jwt__SigningKey`); sem ela a API não arranca.
+
 ### Migrations
 
 ```bash

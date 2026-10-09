@@ -3,3 +3,39 @@
 GET {{CareApp.Api_HostAddress}}/health
 
 ###
+
+POST {{CareApp.Api_HostAddress}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Maria Silva",
+  "email": "maria@example.com",
+  "password": "palavra-passe",
+  "phoneNumber": "+351912345678"
+}
+
+###
+
+POST {{CareApp.Api_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@example.com",
+  "password": "palavra-passe"
+}
+
+###
+
+POST {{CareApp.Api_HostAddress}}/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "<refresh token>"
+}
+
+###
+
+GET {{CareApp.Api_HostAddress}}/auth/me
+Authorization: Bearer <access token>
+
+###

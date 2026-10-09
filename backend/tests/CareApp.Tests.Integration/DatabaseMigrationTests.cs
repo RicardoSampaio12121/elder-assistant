@@ -19,6 +19,16 @@ public class DatabaseMigrationTests(CareAppApiFactory factory)
         var pending = await dbContext.Database.GetPendingMigrationsAsync(cancellationToken);
 
         Assert.Contains(applied, migration => migration.EndsWith("_InitialCreate", StringComparison.Ordinal));
+        Assert.Contains(applied, migration => migration.EndsWith("_AddIdentityAndRefreshTokens", StringComparison.Ordinal));
         Assert.Empty(pending);
+    }
+
+    [Fact]
+    public async Task Model_HasNoChangesMissingFromMigrations()
+    {
+        await using var scope = factory.Services.CreateAsyncScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<CareAppDbContext>();
+
+        Assert.False(dbContext.Database.HasPendingModelChanges());
     }
 }

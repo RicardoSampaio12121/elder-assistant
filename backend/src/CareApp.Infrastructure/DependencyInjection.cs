@@ -1,7 +1,10 @@
+using CareApp.Application.Auth;
+using CareApp.Infrastructure.Identity;
 using CareApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CareApp.Infrastructure;
 
@@ -26,7 +29,42 @@ public static class DependencyInjection
         services.AddHealthChecks()
             .AddDbContextCheck<CareAppDbContext>();
 
+        services.AddIdentityServices();
+
         return services;
+    }
+
+    private static void AddIdentityServices(this IServiceCollection services)
+    {
+        services.TryAddSingleton(TimeProvider.System);
+
+        services.AddOptions<JwtOptions>()
+            .BindConfiguration(JwtOptions.SectionName)
+            .Validate(options => !string.IsNullOrWhiteSpace(options.Issuer), "Jwt:Issuer is not configured.")
+            .Validate(options => !string.IsNullOrWhiteSpace(options.Audience), "Jwt:Audience is not configured.")
+            .Validate(
+                options => options.SigningKey.Length >= JwtOptions.SigningKeyMinLength,
+                $"Jwt:SigningKey must be at least {JwtOptions.SigningKeyMinLength} characters long.")
+            .ValidateOnStart();
+
+        services.AddIdentityCore<User>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                // The email is used as the user name; any character valid in an email is allowed.
+                options.User.AllowedUserNameCharacters = string.Empty;
+
+                // Length is the only password rule (NIST SP 800-63B); it must match RegisterRequestValidator.
+                options.Password.RequiredLength = RegisterRequestValidator.PasswordMinLength;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 1;
+            })
+            .AddEntityFrameworkStores<CareAppDbContext>();
+
+        services.AddScoped<TokenService>();
+        services.AddScoped<IAuthService, IdentityAuthService>();
     }
 
     public static async Task MigrateDatabaseAsync(this IServiceProvider services, CancellationToken cancellationToken = default)
