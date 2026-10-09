@@ -31,6 +31,16 @@ internal sealed class ApplicationExceptionHandler(IProblemDetailsService problem
                 Status = StatusCodes.Status401Unauthorized,
                 Detail = authentication.Message,
             },
+            NotFoundException notFound => new ProblemDetails
+            {
+                Status = StatusCodes.Status404NotFound,
+                Detail = notFound.Message,
+            },
+            ForbiddenException forbidden => new ProblemDetails
+            {
+                Status = StatusCodes.Status403Forbidden,
+                Detail = forbidden.Message,
+            },
             _ => null,
         };
 

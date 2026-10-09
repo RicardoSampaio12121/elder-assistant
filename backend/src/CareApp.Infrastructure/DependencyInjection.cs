@@ -1,4 +1,6 @@
 using CareApp.Application.Auth;
+using CareApp.Application.CareRecipients;
+using CareApp.Infrastructure.CareRecipients;
 using CareApp.Infrastructure.Identity;
 using CareApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +68,9 @@ public static class DependencyInjection
         services.AddScoped<TokenService>();
         services.AddScoped<RefreshTokenManager>();
         services.AddScoped<IAuthService, IdentityAuthService>();
+
+        services.AddScoped<CareRecipientManager>();
+        services.AddScoped<ICareRecipientService, CareRecipientService>();
     }
 
     public static async Task MigrateDatabaseAsync(this IServiceProvider services, CancellationToken cancellationToken = default)
