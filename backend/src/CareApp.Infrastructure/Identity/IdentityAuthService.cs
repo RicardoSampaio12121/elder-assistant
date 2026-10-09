@@ -17,9 +17,9 @@ internal sealed class IdentityAuthService(
     IOptions<JwtOptions> jwtOptions,
     TimeProvider timeProvider) : IAuthService
 {
-    private const string DuplicateEmailMessage = "Já existe uma conta registada com este email.";
-    private const string InvalidCredentialsMessage = "Email ou palavra-passe inválidos.";
-    private const string InvalidRefreshTokenMessage = "A sessão é inválida ou expirou. Inicie sessão novamente.";
+    private const string DuplicateEmailMessage = "An account with this email already exists.";
+    private const string InvalidCredentialsMessage = "Invalid email or password.";
+    private const string InvalidRefreshTokenMessage = "The session is invalid or has expired. Please sign in again.";
 
     public async Task<UserResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken = default)
     {

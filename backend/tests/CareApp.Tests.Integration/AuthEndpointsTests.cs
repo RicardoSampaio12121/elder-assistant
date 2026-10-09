@@ -109,7 +109,7 @@ public class AuthEndpointsTests(CareAppApiFactory factory)
         Assert.Equal("application/problem+json", response.Content.Headers.ContentType?.MediaType);
         var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>(_cancellationToken);
         Assert.Equal(409, problem!.Status);
-        Assert.Equal("Já existe uma conta registada com este email.", problem.Detail);
+        Assert.Equal("An account with this email already exists.", problem.Detail);
     }
 
     [Fact]
@@ -175,7 +175,7 @@ public class AuthEndpointsTests(CareAppApiFactory factory)
 
         var wrongPasswordProblem = await wrongPassword.Content.ReadFromJsonAsync<ProblemDetails>(_cancellationToken);
         var unknownEmailProblem = await unknownEmail.Content.ReadFromJsonAsync<ProblemDetails>(_cancellationToken);
-        Assert.Equal("Email ou palavra-passe inválidos.", wrongPasswordProblem!.Detail);
+        Assert.Equal("Invalid email or password.", wrongPasswordProblem!.Detail);
         Assert.Equal(wrongPasswordProblem.Title, unknownEmailProblem!.Title);
         Assert.Equal(wrongPasswordProblem.Detail, unknownEmailProblem.Detail);
     }

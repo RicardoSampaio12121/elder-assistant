@@ -12,20 +12,20 @@ public sealed class RegisterRequestValidator : AbstractValidator<RegisterRequest
     public RegisterRequestValidator()
     {
         RuleFor(request => request.Name)
-            .NotEmpty().WithMessage("O nome é obrigatório.")
-            .MaximumLength(NameMaxLength).WithMessage($"O nome não pode ter mais de {NameMaxLength} caracteres.");
+            .NotEmpty().WithMessage("Name is required.")
+            .MaximumLength(NameMaxLength).WithMessage($"Name cannot exceed {NameMaxLength} characters.");
 
         RuleFor(request => request.Email)
-            .NotEmpty().WithMessage("O email é obrigatório.")
-            .EmailAddress().WithMessage("O email não é válido.")
-            .MaximumLength(EmailMaxLength).WithMessage($"O email não pode ter mais de {EmailMaxLength} caracteres.");
+            .NotEmpty().WithMessage("Email is required.")
+            .EmailAddress().WithMessage("Email is not valid.")
+            .MaximumLength(EmailMaxLength).WithMessage($"Email cannot exceed {EmailMaxLength} characters.");
 
         RuleFor(request => request.Password)
-            .NotEmpty().WithMessage("A palavra-passe é obrigatória.")
-            .MinimumLength(PasswordMinLength).WithMessage($"A palavra-passe deve ter pelo menos {PasswordMinLength} caracteres.");
+            .NotEmpty().WithMessage("Password is required.")
+            .MinimumLength(PasswordMinLength).WithMessage($"Password must be at least {PasswordMinLength} characters.");
 
         RuleFor(request => request.PhoneNumber)
-            .MaximumLength(PhoneNumberMaxLength).WithMessage($"O telefone não pode ter mais de {PhoneNumberMaxLength} caracteres.");
+            .MaximumLength(PhoneNumberMaxLength).WithMessage($"Phone number cannot exceed {PhoneNumberMaxLength} characters.");
     }
 }
 
@@ -33,8 +33,8 @@ public sealed class LoginRequestValidator : AbstractValidator<LoginRequest>
 {
     public LoginRequestValidator()
     {
-        RuleFor(request => request.Email).NotEmpty().WithMessage("O email é obrigatório.");
-        RuleFor(request => request.Password).NotEmpty().WithMessage("A palavra-passe é obrigatória.");
+        RuleFor(request => request.Email).NotEmpty().WithMessage("Email is required.");
+        RuleFor(request => request.Password).NotEmpty().WithMessage("Password is required.");
     }
 }
 
@@ -42,6 +42,6 @@ public sealed class RefreshTokenRequestValidator : AbstractValidator<RefreshToke
 {
     public RefreshTokenRequestValidator()
     {
-        RuleFor(request => request.RefreshToken).NotEmpty().WithMessage("O refresh token é obrigatório.");
+        RuleFor(request => request.RefreshToken).NotEmpty().WithMessage("Refresh token is required.");
     }
 }
