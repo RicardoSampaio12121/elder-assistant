@@ -157,7 +157,7 @@ void main() {
         testDioAdapter: (_) async => _jsonResponse({}, 401),
         baseDioAdapter: (opts) async {
           baseDioCalls++;
-          if (opts.path.contains('/api/auth/refresh')) {
+          if (opts.path.contains('/auth/refresh')) {
             return _jsonResponse(_tokensJson, 200);
           }
           // retry call

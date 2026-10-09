@@ -48,7 +48,7 @@ class AuthInterceptor extends Interceptor {
 
     try {
       final refreshResponse = await _baseDio.post<Map<String, dynamic>>(
-        '/api/auth/refresh',
+        '/auth/refresh',
         data: {'refreshToken': refreshToken},
       );
       final tokens = AuthTokensResponse.fromJson(refreshResponse.data!);

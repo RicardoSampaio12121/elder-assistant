@@ -24,7 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
     String? phoneNumber,
   }) async {
     final response = await _dio.post<Map<String, dynamic>>(
-      '/api/auth/register',
+      '/auth/register',
       data: RegisterRequest(
         name: name,
         email: email,
@@ -43,7 +43,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     final response = await _dio.post<Map<String, dynamic>>(
-      '/api/auth/login',
+      '/auth/login',
       data: LoginRequest(email: email, password: password).toJson(),
     );
     final tokens = AuthTokensResponse.fromJson(response.data!).toDomain();
@@ -54,7 +54,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<AuthTokens> refresh({required String refreshToken}) async {
     final response = await _dio.post<Map<String, dynamic>>(
-      '/api/auth/refresh',
+      '/auth/refresh',
       data: RefreshTokenRequest(refreshToken: refreshToken).toJson(),
     );
     final tokens = AuthTokensResponse.fromJson(response.data!).toDomain();
