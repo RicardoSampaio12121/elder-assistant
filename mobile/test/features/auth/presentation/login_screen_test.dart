@@ -1,3 +1,4 @@
+import 'package:careapp/features/auth/data/secure_token_storage.dart';
 import 'package:careapp/features/auth/presentation/auth_notifier.dart';
 import 'package:careapp/features/auth/presentation/auth_state.dart';
 import 'package:careapp/features/auth/presentation/login_screen.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod/misc.dart' show Override;
 
 import '../../../helpers/fake_secure_token_storage.dart';
 
@@ -58,7 +60,7 @@ Widget _buildApp(
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: GoRouter(
         initialLocation: '/',
-        routes: [GoRoute(path: '/', builder: (_, __) => const LoginScreen())],
+        routes: [GoRoute(path: '/', builder: (_, _) => const LoginScreen())],
       ),
     ),
   );
@@ -135,7 +137,7 @@ void main() {
           ),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
@@ -151,7 +153,7 @@ void main() {
           ),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       final button = tester.widget<FilledButton>(
         find.byKey(const Key('submitButton')),
