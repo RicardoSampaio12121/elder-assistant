@@ -1,0 +1,15 @@
+{
+  "@@locale": "pt",
+  "appTitle": "CareApp",
+  "@appTitle": {
+    "description": "Nome da aplicação."
+  },
+  "homeWelcome": "Bem-vindo ao CareApp",
+  "@homeWelcome": {
+    "description": "Mensagem de boas-vindas no ecrã inicial (placeholder)."
+  },
+  "homeComingSoon": "Em breve, mais funcionalidades.",
+  "@homeComingSoon": {
+    "description": "Texto informativo no ecrã inicial (placeholder)."
+  }
+}
