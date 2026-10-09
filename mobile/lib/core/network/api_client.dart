@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+const _apiBaseUrlEnv = String.fromEnvironment('API_BASE_URL');
 
 /// Base URL of the CareApp API.
 ///
-/// Override with `--dart-define=API_BASE_URL=...`. The default targets the
-/// backend running on the host machine as seen from the Android emulator.
-const apiBaseUrl = String.fromEnvironment(
-  'API_BASE_URL',
-  defaultValue: 'http://10.0.2.2:5293',
-);
+/// Override at build time with `--dart-define=API_BASE_URL=...`.
+/// Defaults to localhost for web/desktop and 10.0.2.2 for Android emulator.
+String get apiBaseUrl {
+  if (_apiBaseUrlEnv.isNotEmpty) return _apiBaseUrlEnv;
+  return kIsWeb ? 'http://localhost:5293' : 'http://10.0.2.2:5293';
+}
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(

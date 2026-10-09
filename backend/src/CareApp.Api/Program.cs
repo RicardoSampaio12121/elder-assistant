@@ -15,6 +15,12 @@ builder.Services.AddExceptionHandler<ApplicationExceptionHandler>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 if (app.Configuration.GetValue<bool>("Database:MigrateOnStartup"))
@@ -25,6 +31,7 @@ if (app.Configuration.GetValue<bool>("Database:MigrateOnStartup"))
 // Unhandled exceptions and empty error responses are returned as ProblemDetails (RFC 9457).
 app.UseExceptionHandler();
 app.UseStatusCodePages();
+app.UseCors();
 
 if (app.Environment.IsDevelopment())
 {

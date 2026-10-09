@@ -1,5 +1,7 @@
 # Flutter/Dart
 .dart_tool/
+.metadata
+README.md
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
@@ -13,6 +15,11 @@ lib/l10n/app_localizations*.dart
 .idea/
 *.iml
 .vscode/
+
+# Desktop platforms (not targeting these)
+linux/
+macos/
+windows/
 
 # Android
 android/.gradle/

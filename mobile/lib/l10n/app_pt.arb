@@ -11,5 +11,113 @@
   "homeComingSoon": "Em breve, mais funcionalidades.",
   "@homeComingSoon": {
     "description": "Texto informativo no ecrã inicial (placeholder)."
+  },
+  "homeLogout": "Terminar sessão",
+  "@homeLogout": {
+    "description": "Botão para terminar sessão."
+  },
+  "loginTitle": "Entrar",
+  "@loginTitle": {
+    "description": "Título do ecrã de início de sessão."
+  },
+  "loginEmail": "E-mail",
+  "@loginEmail": {
+    "description": "Rótulo do campo de e-mail no início de sessão."
+  },
+  "loginPassword": "Palavra-passe",
+  "@loginPassword": {
+    "description": "Rótulo do campo de palavra-passe."
+  },
+  "loginSubmit": "Entrar",
+  "@loginSubmit": {
+    "description": "Botão de submissão no início de sessão."
+  },
+  "loginInvalidCredentials": "E-mail ou palavra-passe incorretos.",
+  "@loginInvalidCredentials": {
+    "description": "Erro de credenciais inválidas no login."
+  },
+  "registerTitle": "Criar conta",
+  "@registerTitle": {
+    "description": "Título do ecrã de registo."
+  },
+  "registerName": "Nome completo",
+  "@registerName": {
+    "description": "Rótulo do campo de nome no registo."
+  },
+  "registerEmail": "E-mail",
+  "@registerEmail": {
+    "description": "Rótulo do campo de e-mail no registo."
+  },
+  "registerPassword": "Palavra-passe",
+  "@registerPassword": {
+    "description": "Rótulo do campo de palavra-passe no registo."
+  },
+  "registerPhone": "Telemóvel (opcional)",
+  "@registerPhone": {
+    "description": "Rótulo do campo de telemóvel no registo (opcional)."
+  },
+  "registerSubmit": "Criar conta",
+  "@registerSubmit": {
+    "description": "Botão de submissão no registo."
+  },
+  "registerEmailTaken": "Este e-mail já está registado.",
+  "@registerEmailTaken": {
+    "description": "Erro de e-mail duplicado no registo."
+  },
+  "authRegisterLink": "Não tem conta? Criar conta",
+  "@authRegisterLink": {
+    "description": "Ligação para o ecrã de registo."
+  },
+  "authLoginLink": "Já tem conta? Entrar",
+  "@authLoginLink": {
+    "description": "Ligação para o ecrã de início de sessão."
+  },
+  "fieldRequired": "Campo obrigatório.",
+  "@fieldRequired": {
+    "description": "Erro de campo obrigatório."
+  },
+  "fieldInvalidEmail": "Introduza um e-mail válido.",
+  "@fieldInvalidEmail": {
+    "description": "Erro de formato de e-mail inválido."
+  },
+  "fieldPasswordTooShort": "A palavra-passe deve ter pelo menos 8 caracteres.",
+  "@fieldPasswordTooShort": {
+    "description": "Erro de palavra-passe demasiado curta."
+  },
+  "errorGeneric": "Ocorreu um erro. Tente novamente.",
+  "@errorGeneric": {
+    "description": "Mensagem de erro genérico."
+  },
+  "authTagline": "Cuidar em conjunto.",
+  "@authTagline": {
+    "description": "Tagline nos ecrãs de autenticação."
+  },
+  "homeSubtitle": "O seu painel de cuidado diário.",
+  "@homeSubtitle": {
+    "description": "Subtítulo do ecrã inicial."
+  },
+  "homeSectionMedication": "Medicação",
+  "@homeSectionMedication": {
+    "description": "Título da secção de medicação."
+  },
+  "homeSectionAppointments": "Consultas",
+  "@homeSectionAppointments": {
+    "description": "Título da secção de consultas."
+  },
+  "homeSectionFamily": "Família",
+  "@homeSectionFamily": {
+    "description": "Título da secção de família."
+  },
+  "homeEmptyMedication": "Sem medicação registada para hoje",
+  "@homeEmptyMedication": {
+    "description": "Estado vazio da secção de medicação."
+  },
+  "homeEmptyAppointments": "Sem consultas marcadas",
+  "@homeEmptyAppointments": {
+    "description": "Estado vazio da secção de consultas."
+  },
+  "homeEmptyFamily": "Sem atualizações recentes",
+  "@homeEmptyFamily": {
+    "description": "Estado vazio da secção de família."
   }
 }
