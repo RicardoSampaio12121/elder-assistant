@@ -53,9 +53,7 @@ internal sealed class CareRecipientService(
         if (member.Role != CareRecipientMemberRole.Owner)
             throw new ForbiddenException("Only the owner can update a care recipient.");
 
-        recipient.Name = request.Name;
-        recipient.DateOfBirth = request.DateOfBirth;
-        recipient.Notes = request.Notes;
+        recipient.Update(request.Name, request.DateOfBirth, request.Notes);
 
         await careRecipientManager.UpdateAsync(cancellationToken);
         return ToResponse(recipient);

@@ -13,15 +13,15 @@ public class CareRecipientMember
         JoinedAt = joinedAt;
     }
 
-    public Guid Id { get; set; }
+    public Guid Id { get; private set; }
 
-    public Guid CareRecipientId { get; set; }
+    public Guid CareRecipientId { get; private set; }
 
-    public CareRecipient CareRecipient { get; set; } = null!;
+    public CareRecipient CareRecipient { get; private set; } = null!;
 
-    public Guid UserId { get; set; }
+    public Guid UserId { get; private set; }
 
-    public CareRecipientMemberRole Role { get; set; }
+    public CareRecipientMemberRole Role { get; private set; }
 
-    public DateTimeOffset JoinedAt { get; set; }
+    public DateTimeOffset JoinedAt { get; private set; }
 }

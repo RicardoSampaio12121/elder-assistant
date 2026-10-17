@@ -13,15 +13,22 @@ public class CareRecipient
         CreatedAt = createdAt;
     }
 
-    public Guid Id { get; set; }
+    public Guid Id { get; private set; }
 
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; private set; } = string.Empty;
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; private set; }
 
-    public string? Notes { get; set; }
+    public string? Notes { get; private set; }
 
-    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; private set; }
 
-    public ICollection<CareRecipientMember> Members { get; set; } = new List<CareRecipientMember>();
+    public ICollection<CareRecipientMember> Members { get; private set; } = new List<CareRecipientMember>();
+
+    public void Update(string name, DateOnly dateOfBirth, string? notes)
+    {
+        Name = name;
+        DateOfBirth = dateOfBirth;
+        Notes = notes;
+    }
 }
