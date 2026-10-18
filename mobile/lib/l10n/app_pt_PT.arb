@@ -29,5 +29,22 @@
   "homeSectionFamily": "Família",
   "homeEmptyMedication": "Sem medicação registada para hoje",
   "homeEmptyAppointments": "Sem consultas marcadas",
-  "homeEmptyFamily": "Sem atualizações recentes"
+  "homeEmptyFamily": "Sem atualizações recentes",
+  "recipientsTitle": "Pessoas a Cuidar",
+  "recipientsEmpty": "Ainda não tem nenhuma pessoa a cuidar registada.",
+  "recipientNewTitle": "Nova Pessoa",
+  "recipientEditTitle": "Editar Perfil",
+  "recipientName": "Nome",
+  "recipientDateOfBirth": "Data de nascimento",
+  "recipientNotes": "Notas (opcional)",
+  "recipientCreate": "Registar",
+  "recipientSave": "Guardar alterações",
+  "recipientEdit": "Editar",
+  "recipientDelete": "Eliminar",
+  "recipientDeleteDialogTitle": "Eliminar registo",
+  "recipientDeleteDialogMessage": "Tem a certeza que pretende eliminar este registo? Esta ação é irreversível.",
+  "confirmYes": "Sim, eliminar",
+  "confirmCancel": "Cancelar",
+  "recipientNotFound": "Registo não encontrado.",
+  "errorRetry": "Tentar novamente"
 }

@@ -119,5 +119,73 @@
   "homeEmptyFamily": "Sem atualizações recentes",
   "@homeEmptyFamily": {
     "description": "Estado vazio da secção de família."
+  },
+  "recipientsTitle": "Pessoas a Cuidar",
+  "@recipientsTitle": {
+    "description": "Título do ecrã de lista de pessoas a cuidar."
+  },
+  "recipientsEmpty": "Ainda não tem nenhuma pessoa a cuidar registada.",
+  "@recipientsEmpty": {
+    "description": "Estado vazio da lista de pessoas a cuidar."
+  },
+  "recipientNewTitle": "Nova Pessoa",
+  "@recipientNewTitle": {
+    "description": "Título do ecrã de criação de pessoa a cuidar."
+  },
+  "recipientEditTitle": "Editar Perfil",
+  "@recipientEditTitle": {
+    "description": "Título do ecrã de edição de pessoa a cuidar."
+  },
+  "recipientName": "Nome",
+  "@recipientName": {
+    "description": "Rótulo do campo de nome da pessoa a cuidar."
+  },
+  "recipientDateOfBirth": "Data de nascimento",
+  "@recipientDateOfBirth": {
+    "description": "Rótulo do campo de data de nascimento."
+  },
+  "recipientNotes": "Notas (opcional)",
+  "@recipientNotes": {
+    "description": "Rótulo do campo de notas (opcional)."
+  },
+  "recipientCreate": "Registar",
+  "@recipientCreate": {
+    "description": "Botão de submissão para criar pessoa a cuidar."
+  },
+  "recipientSave": "Guardar alterações",
+  "@recipientSave": {
+    "description": "Botão de submissão para guardar alterações."
+  },
+  "recipientEdit": "Editar",
+  "@recipientEdit": {
+    "description": "Botão para entrar em modo de edição."
+  },
+  "recipientDelete": "Eliminar",
+  "@recipientDelete": {
+    "description": "Botão para eliminar pessoa a cuidar."
+  },
+  "recipientDeleteDialogTitle": "Eliminar registo",
+  "@recipientDeleteDialogTitle": {
+    "description": "Título do diálogo de confirmação de eliminação."
+  },
+  "recipientDeleteDialogMessage": "Tem a certeza que pretende eliminar este registo? Esta ação é irreversível.",
+  "@recipientDeleteDialogMessage": {
+    "description": "Mensagem do diálogo de confirmação de eliminação."
+  },
+  "confirmYes": "Sim, eliminar",
+  "@confirmYes": {
+    "description": "Botão de confirmação de eliminação."
+  },
+  "confirmCancel": "Cancelar",
+  "@confirmCancel": {
+    "description": "Botão de cancelamento."
+  },
+  "recipientNotFound": "Registo não encontrado.",
+  "@recipientNotFound": {
+    "description": "Mensagem de erro quando o registo não é encontrado."
+  },
+  "errorRetry": "Tentar novamente",
+  "@errorRetry": {
+    "description": "Botão para tentar novamente após erro."
   }
 }
