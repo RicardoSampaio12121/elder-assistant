@@ -6,6 +6,9 @@ import '../../features/auth/presentation/auth_notifier.dart';
 import '../../features/auth/presentation/auth_state.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/register_screen.dart';
+import '../../features/care_recipients/presentation/care_recipient_detail_screen.dart';
+import '../../features/care_recipients/presentation/care_recipient_form_screen.dart';
+import '../../features/care_recipients/presentation/care_recipients_list_screen.dart';
 import '../../features/home/home_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -30,6 +33,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RegisterScreen.path,
         name: RegisterScreen.routeName,
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: CareRecipientsListScreen.path,
+        name: CareRecipientsListScreen.routeName,
+        builder: (context, state) => const CareRecipientsListScreen(),
+        routes: [
+          GoRoute(
+            path: 'new',
+            name: CareRecipientFormScreen.routeName,
+            builder: (context, state) => const CareRecipientFormScreen(),
+          ),
+          GoRoute(
+            path: ':id',
+            name: CareRecipientDetailScreen.routeName,
+            builder: (context, state) => CareRecipientDetailScreen(
+              id: state.pathParameters['id']!,
+            ),
+          ),
+        ],
       ),
     ],
   );
